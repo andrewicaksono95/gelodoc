@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<%- include('../partials/head', { title: 'Tambah Penyakit - gelodoc' }) %>
+<body>
+  <%- include('../partials/navbar') %>
+  <div class="container mt-4">
+    <h3 class="mb-4 brand-title">Tambah Penyakit</h3>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="POST" action="/diseases/add">
+                <div class="mb-3">
+                        <label>Nama</label>
+                        <input type="text" class="form-control" name="name">
+                    </div>
+                    <div class="mb-3">
+                        <label>Deskripsi</label>
+                        <textarea class="form-control" name="description"></textarea>
+                    </div>
+                    <div class="'mb-3">
+                        <label>Level</label>
+                        <select name="level" class="form-select">
+                            <option value="1">Ringan</option>
+                            <option value="2">Sedang</option>
+                            <option value="3">Berat</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label>Gejala (multi-select)</label>
+                        <select name="symptomIds" multiple size="6" class="form-select">
+                            <% symptoms.forEach(s => { %>
+                                <option value="<%= s.id %>"><%= s.name %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <button class="btn btn-success">Simpan</button>
+                    <a href="/diseases" class="btn btn-secondary">Kembali</a>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+</body>
+</html>

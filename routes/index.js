@@ -1,0 +1,21 @@
+const express = require('express')
+const AuthController = require('../controllers/authController')
+const DiseaseController = require('../controllers/DiseaseController')
+const DiagnoseController = require('../controllers/DiagnoseController')
+const LandingController = require('../controllers/LandingController')
+const router = express.Router()
+const {isLogin, isAdmin} = require('../middlewares/auth')
+
+router.get('/login', AuthController.loginForm)
+router.post('/login', AuthController.login)
+router.get('/register', AuthController.registerForm)
+router.post('/register', AuthController.register)
+router.get('/logout', AuthController.logout)
+router.get('/', isLogin, LandingController.show)
+router.get('/diseases', isLogin, DiseaseController.list)
+router.get('/diseases/add', isLogin, isAdmin, DiseaseController.form)
+router.post('/diseases/add', isLogin, isAdmin, DiseaseController.add)
+router.get('/diagnose', isLogin, DiagnoseController.form)
+router.post('/diagnose', isLogin, DiagnoseController.result)
+
+module.exports = router

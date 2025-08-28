@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<%- include('../partials/head', { title: 'Tambah Penyakit - gelodoc' }) %>
+<body>
+  <%- include('../partials/navbar') %>
+  <div class="container mt-4">
+    <h3 class="mb-4 brand-title">Daftar Penyakit</h3>
+    <form method="GET" action="/diseases" class="row g-3 mb-3">
+        <div class="col-auto">
+            <input type="text" name="search" class="form-control" placeholder="Cari Penyakit">
+        </div>
+        <div class="col-auto">
+            <select name="sort" class="form-select">
+                <option value="">Sort Level</option>
+                <option value="ASC">Rendah → Tinggi</option>
+                <option value="DESC">Tinggi → Rendah</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-primary">Filter</button>
+        </div> 
+    </form>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Level</th>
+                <th>Deskripsi</th>
+                <th>Dibuat Oleh</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% disease.forEach(d => { %>
+            <tr>
+                <td><%= d.name %></td>
+                <td><%= formatLevel(d.level) %></td>
+                <td><%= d.description %></td>
+                <td><%= d.User && d.User.Profile ? d.User.Profile.name : '-' %></td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <a href="/diseases/add" class="btn btn-success">Tambah Penyakit</a>
+  </div>
+</body>
+</html>

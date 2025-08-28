@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head', {title: 'Login'}) %>
+<body>
+    <%- include('partials/navbar') %>
+    <div class="container mt-4">
+        <h3 class="mb-4 brand-title">Hasil Diagnosa</h3>
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <% if (diseases.length) { %>
+                    <ul class="list-group">
+                        <% diseases.forEach(disease => { %>
+                            <li class="list-group-item">
+                                <strong><%= disease.name %></strong> - <%= disease.description %>
+                            </li>
+                        <% }) %>
+                    </ul>
+                <% } else { %>
+                    <div class="alert alert-warning">Tidak ada penyakit yang cocok dengan gejala yang dipilih</div>
+                <% } %>
+                <hr>
+                <h5>Kirim Pertanyaan ke Dokter</h5>
+                <form action="/send-email" method="POST">
+                   <div class="mb-3">
+                        <label>Email</label>
+                        <input type="email" class="form-control" name="from">
+                    </div>
+                    <div class="mb-3">
+                        <label>Pertanyaan</label>
+                        <textarea class="form-control" name="message" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label>Password</label>
+                        <input type="password" class="form-control" name="password">
+                    </div>
+                    <button class="btn btn-warning">Kirim Email</button> 
+                </form>
+                <a href="/diagnose" class="btn btn-primary mt-3">Diagnosa lagi</a>
+                <a href="/" class="btn btn-secondary mt-3">Ke Home</a>    
+            </div>
+        </div>
+    </div>  
+</body>
+</html>
