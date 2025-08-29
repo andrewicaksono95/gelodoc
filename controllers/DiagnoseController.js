@@ -1,4 +1,4 @@
-const {Disease, Symptom} = require("../models");
+const {Disease, Symptom, DiseaseSymptom} = require("../models");
 const { Op } = require("sequelize");
 
 class DiagnoseController {

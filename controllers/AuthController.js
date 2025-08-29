@@ -14,6 +14,7 @@ class AuthController {
                 return res.send('Email atau password salah')
             req.session.userId = user.id
             req.session.role = user.role
+            req.session.profileName = user.Profile?.name || ''
 
             res.redirect('/')
         } catch (error) {

@@ -7,13 +7,15 @@
     <h3 class="mb-4 brand title">Diagnosa</h3>
     <div class="card shadow-sm">
         <div class="card-body">
-            <form action="'/diagnose" method="POST">
+            <form action="/diagnose" method="POST">
                 <% symptoms.forEach(symptom =>{ %>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="symptomIds" value="<%= symptom.id %>">
                         <label class="form-check-label"><%= symptom.name %></label>
                     </div>
                 <% }) %>
+                <button class="btn btn-primary mt-3">Diagnosa</button>
+                <a href="/" class="btn btn-secondary mt-3">Kembali</a>
             </form>
         </div>
     </div>

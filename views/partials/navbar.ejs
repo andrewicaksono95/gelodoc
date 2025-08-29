@@ -7,6 +7,11 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
+            <% if (role === 'admin') { %>
+            <li class="nav-item me-2">
+                <a href="/diseases" class="btn btn-outline-primary btn-sm">Kelola Penyakit</a>
+            </li>
+            <% } %>
             <li class="nav-item" me-2>
                 <a href="/diagnose" class="btn btn-outline-success btn-sm">Diagnosa</a>
             </li>

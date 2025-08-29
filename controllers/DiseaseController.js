@@ -7,7 +7,7 @@ class DiseaseController {
         try {
             const {search, sort} = req.query
             const option = {include: Symptom}
-            if (search) option.where = {name: {[Op.iLike]: `${search}`}}
+            if (search) option.where = {name: {[Op.iLike]: `%${search}%`}}
             if(sort) option.order = [['level', sort]]
             const diseases = await Disease.findAll(option) 
             res.render('diseases/list', {diseases, formatLevel})
@@ -36,6 +36,15 @@ class DiseaseController {
             res.redirect('/diseases')
         } catch (error) {
                 next(error)
+        }
+    }
+
+    static async delete(req, res, next) {
+        try {
+            await Disease.destroy({where: {id: req.params.id}})
+            res.redirect('/diseases')
+        } catch (error) {
+            next(error)
         }
     }
 }

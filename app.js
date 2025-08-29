@@ -15,6 +15,11 @@ app.use(session({
 }))
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
+app.use((req, res, next) => {
+    res.locals.role = req.session.role || null;
+    res.locals.profileName = req.session.profileName || ''
+    next()
+})
 
 app.use('/', routes)
 app.use(errorHandler)

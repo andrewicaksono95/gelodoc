@@ -30,12 +30,19 @@
             </tr>
         </thead>
         <tbody>
-            <% disease.forEach(d => { %>
+            <% diseases.forEach(d => { %>
             <tr>
                 <td><%= d.name %></td>
                 <td><%= formatLevel(d.level) %></td>
                 <td><%= d.description %></td>
                 <td><%= d.User && d.User.Profile ? d.User.Profile.name : '-' %></td>
+                <% if (role === 'admin') { %>
+                    <td>
+                        <form action="/diseases/<%= d.id %>?_method=DELETE" method="POST">
+                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                        </form>
+                    </td>
+                <% } %>
             </tr>
             <% }) %>
         </tbody>

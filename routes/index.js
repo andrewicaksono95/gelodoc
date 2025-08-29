@@ -3,8 +3,10 @@ const AuthController = require('../controllers/authController')
 const DiseaseController = require('../controllers/DiseaseController')
 const DiagnoseController = require('../controllers/DiagnoseController')
 const LandingController = require('../controllers/LandingController')
+const EmailController = require('../controllers/EmailController')
 const router = express.Router()
 const {isLogin, isAdmin} = require('../middlewares/auth')
+
 
 router.get('/login', AuthController.loginForm)
 router.post('/login', AuthController.login)
@@ -15,7 +17,9 @@ router.get('/', isLogin, LandingController.show)
 router.get('/diseases', isLogin, DiseaseController.list)
 router.get('/diseases/add', isLogin, isAdmin, DiseaseController.form)
 router.post('/diseases/add', isLogin, isAdmin, DiseaseController.add)
+router.delete('/diseases/:id', isLogin, isAdmin, DiseaseController.delete)
 router.get('/diagnose', isLogin, DiagnoseController.form)
 router.post('/diagnose', isLogin, DiagnoseController.result)
+router.post('/send-email', EmailController.send)
 
 module.exports = router
